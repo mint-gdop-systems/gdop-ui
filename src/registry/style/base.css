@@ -3,20 +3,21 @@
  *
  *   • The docs Colors page parses this file and renders it (app/docs/foundations/colors).
  *   • The shadcn registry item "base" ships this file as-is (registry.json → public/r/base.json).
- *   • The @theme block at the bottom is GENERATED from the declarations below
+ *   • The generated block at the bottom is rebuilt from the declarations below
  *     (`npm run tokens:sync`). Edit tokens here; never edit the generated block.
  *
  * Authoring rules (the parser relies on them):
- *   1. Declarations live in `:root { }` (light) and `.dark { }` (overrides only).
+ *   1. Declarations live in the light block (root) and the dark block (overrides only).
  *   2. A comment line of the form  @group <kind> <id>: <description>  starts a group
  *      (see the groups below for examples).
- *      kinds: scale | semantic | tone | other.  scale/tone ids must match the token names:
- *      --<id>-<step> for scales, --tone-<id>-<role> for tones.
+ *      kinds: semantic | tone | scale | other.  Tone ids must match the token names:
+ *      --tone-<id>-<role>; scale ids match --<id>-<step>.
  *   3. One declaration per line. A short trailing comment becomes the token's description.
- *   4. Components use semantic + tone tokens. Scales are primitives.
+ *   4. Components use semantic + tone tokens.
  *
  * Install target: ~/app/base.css, then `@import "./base.css";` after `@import "tailwindcss";`.
  * ========================================================================== */
+@import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -25,49 +26,52 @@
   --background: oklch(0.9581 0 0);
   --foreground: oklch(0.3134 0.0234 253.627);
   --card: oklch(0.9774 0.0042 236.4961);
-  --card-foreground: oklch(0.2022 0.011 151.1628);
+  --card-foreground: oklch(0.2022 0.011 253.627);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.2505 0.0149 235.6259);
 
   /* @group semantic actions: Buttons and emphasis: primary, secondary, accent, destructive. */
-  --primary: oklch(0.6112 0.1217 248.9572);
+  --primary: oklch(0.4447 0.1346 252.39);
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.9122 0.0111 243.6627);
   --secondary-foreground: oklch(0.4186 0.0133 235.133);
   --accent: oklch(0.9122 0.0111 243.6627);
   --accent-foreground: oklch(0.2505 0.0149 235.6259);
-  --destructive: oklch(0.1931 0.0037 164.6298);
+  --destructive: oklch(0.5624 0.1743 26.1433);
   --destructive-foreground: oklch(1 0 0);
 
   /* @group semantic content: Subdued surfaces and secondary text. */
   --muted: oklch(0.9209 0.0128 244.2626);
-  --muted-foreground: oklch(0.6027 0.0062 211.0375);
+  --muted-foreground: oklch(0.505 0.0234 252);
 
   /* @group semantic form: Borders, inputs and focus rings. */
-  --border: oklch(0.884 0.0067 208.7806);
-  --input: oklch(0.745 0.0121 252.1201);
-  --ring: oklch(0.6112 0.1217 248.9572);
+  --border: oklch(0.884 0.0067 252);
+  --input: oklch(0.63 0.0121 252.1201);
+  --ring: oklch(0.5904 0.1284 252.29);
 
   /* @group semantic sidebar: Navigation sidebar surfaces. */
   --sidebar: oklch(0.959 0.0059 239.8204);
-  --sidebar-foreground: oklch(0.3571 0.0041 196.9738);
-  --sidebar-primary: oklch(0.6112 0.1217 248.9572);
+  --sidebar-foreground: oklch(0.3571 0.0041 253);
+  --sidebar-primary: oklch(0.4447 0.1346 252.39);
   --sidebar-primary-foreground: oklch(0.9881 0 0);
-  --sidebar-accent: oklch(0.9122 0.0111 243.6627);
-  --sidebar-accent-foreground: oklch(0.325 0 0);
-  --sidebar-border: oklch(0.9401 0 0);
-  --sidebar-ring: oklch(0.7731 0 0);
+  --sidebar-accent: oklch(0.8808 0.0646 252.66);
+  --sidebar-accent-foreground: oklch(0.2841 0.0848 252.5);
+  --sidebar-border: oklch(0.9 0.008 252);
+  --sidebar-ring: oklch(0.5904 0.1284 252.29);
 
-  /* @group semantic charts: Data-visualization series colors. */
-  --chart-1: oklch(0.5098 0.132 257.5458);
-  --chart-2: oklch(0.736 0.1191 266.5038);
-  --chart-3: oklch(0.8467 0.0177 248.0373);
-  --chart-4: oklch(0.8977 0.0274 260.3158);
-  --chart-5: oklch(0.4893 0.1504 261.9302);
+  /* @group semantic charts: Data-visualization series colors. Each is at least 3:1 against the page background. */
+  --chart-1: oklch(0.4447 0.1346 252.39);
+  --chart-2: oklch(0.5904 0.1284 252.29);
+  --chart-3: oklch(0.55 0.1 215);
+  --chart-4: oklch(0.5 0.15 300);
+  --chart-5: oklch(0.58 0.13 75);
 
-  /* @group other shape: Corner radius. sm/md/lg/xl derive from this. */
+  /* @group other shape: Corner radius, spacing unit and base letter-spacing. */
   --radius: 0.5rem;
+  --spacing: 0.25rem;
+  --tracking-normal: -0.01em;
 
+  /* @group other elevation: Shadows. Dark mode uses heavier shadows. */
   --shadow-x: 0px;
   --shadow-y: 2px;
   --shadow-blur: 4px;
@@ -87,10 +91,6 @@
   --shadow-xl:
     0px 2px 4px 0px hsl(0 0% 0% / 0.1), 0px 8px 10px -1px hsl(0 0% 0% / 0.1);
   --shadow-2xl: 0px 2px 4px 0px hsl(0 0% 0% / 0.25);
-
-  --tracking-normal: -0.01em;
-
-  --spacing: 0.25rem;
 }
 
 .dark {
@@ -100,8 +100,8 @@
   --card-foreground: oklch(0.9755 0.0045 258.3245);
   --popover: oklch(0.3046 0.0023 247.9001);
   --popover-foreground: oklch(0.9176 0.0026 228.7865);
-  --primary: oklch(0.6576 0.1208 252.0832);
-  --primary-foreground: oklch(1 0 0);
+  --primary: oklch(0.7093 0.1113 252.63);
+  --primary-foreground: oklch(0.1448 0.02 252);
   --secondary: oklch(0.9774 0.0042 236.4961);
   --secondary-foreground: oklch(0.3046 0.0023 247.9001);
   --muted: oklch(0.2171 0.0025 247.9411);
@@ -109,24 +109,24 @@
   --accent: oklch(0.2038 0.0067 258.3676);
   --accent-foreground: oklch(0.959 0.0059 239.8204);
   --destructive: oklch(0.6368 0.2078 25.3313);
-  --destructive-foreground: oklch(1 0 0);
+  --destructive-foreground: oklch(0.1448 0.02 252);
   --border: oklch(0.3506 0.0066 248.0169);
-  --input: oklch(0.4217 0.0084 248.028);
-  --ring: oklch(0.6576 0.1208 252.0832);
+  --input: oklch(0.497 0.0084 248.028);
+  --ring: oklch(0.7093 0.1113 252.63);
   --sidebar: oklch(0.2344 0.0024 247.9303);
   --sidebar-foreground: oklch(0.7905 0.0126 259.8241);
-  --sidebar-primary: oklch(0.325 0 0);
-  --sidebar-primary-foreground: oklch(0.9881 0 0);
-  --sidebar-accent: oklch(0.1673 0.0016 196.9991);
-  --sidebar-accent-foreground: oklch(0.7905 0.0126 259.8241);
-  --sidebar-border: oklch(0.9401 0 0);
-  --sidebar-ring: oklch(0.7731 0 0);
-  --chart-1: oklch(0.5098 0.132 257.5458);
-  --chart-2: oklch(0.736 0.1191 266.5038);
-  --chart-3: oklch(0.2038 0.0067 258.3676);
-  --chart-4: oklch(0.3361 0.0333 253.9085);
-  --chart-5: oklch(0.4893 0.1504 261.9302);
-  --radius: 0.5rem;
+  --sidebar-primary: oklch(0.7093 0.1113 252.63);
+  --sidebar-primary-foreground: oklch(0.1448 0.02 252);
+  --sidebar-accent: oklch(0.33 0.07 252.5);
+  --sidebar-accent-foreground: oklch(0.9755 0.0045 258.3245);
+  --sidebar-border: oklch(0.3506 0.0066 248.0169);
+  --sidebar-ring: oklch(0.7093 0.1113 252.63);
+  --chart-1: oklch(0.7093 0.1113 252.63);
+  --chart-2: oklch(0.8102 0.0945 252.76);
+  --chart-3: oklch(0.74 0.1 215);
+  --chart-4: oklch(0.72 0.13 300);
+  --chart-5: oklch(0.8 0.13 75);
+
   --shadow-x: 0px;
   --shadow-y: 4px;
   --shadow-blur: 8px;
@@ -170,6 +170,33 @@
   --tracking-wide: calc(var(--tracking-normal) + 0.025em);
   --tracking-wider: calc(var(--tracking-normal) + 0.05em);
   --tracking-widest: calc(var(--tracking-normal) + 0.1em);
+
+  /* var(--font-inter) / var(--font-instrument) are provided by next/font when present */
+  --font-sans:
+    var(--font-inter, "Inter"), "Noto Sans Ethiopic", ui-sans-serif, system-ui,
+    sans-serif;
+  --font-serif: var(--font-instrument, "Instrument Serif"), Georgia, serif;
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+}
+
+/* Base styles. Kept OUTSIDE the generated region below, which sync rewrites. */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply bg-sidebar;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  :focus-visible {
+    @apply outline-ring outline-2 outline-offset-2;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
 }
 
 /* @generated:start — color utilities, rebuilt by `npm run tokens:sync`. Do not edit. */
@@ -212,24 +239,5 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  html {
-    @apply bg-sidebar;
-  }
-  body {
-    @apply bg-background text-foreground antialiased;
-  }
-  :focus-visible {
-    @apply outline-ring outline-2 outline-offset-2;
-  }
-  button:not(:disabled),
-  [role="button"]:not(:disabled) {
-    cursor: pointer;
-  }
 }
 /* @generated:end */

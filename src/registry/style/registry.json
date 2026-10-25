@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "items": [
     {
-      "name": "base",
+      "name": "globals",
       "type": "registry:base",
       "title": "GDOP base design system",
       "description": "All GDOP colors and design tokens (scales, semantic, status tones, radius, elevation) with Tailwind v4 theme wiring.",
@@ -10,10 +10,9 @@
         {
           "path": "base.css",
           "type": "registry:base",
-          "target": "~/app/base.css"
+          "target": "~src/app/globals.css"
         }
-      ],
-      "docs": "Add `@import \"./base.css\";` after `@import \"tailwindcss\";` in your globals.css, and remove the default shadcn color variables it replaces. Using a src/ directory? Move the file to src/app/base.css."
+      ]
     }
   ]
 }

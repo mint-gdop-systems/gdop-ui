@@ -4,7 +4,7 @@ import "./globals.css";
 import AppSidebar from "@/components/shared/app-sidebar";
 import { ThemeProvider } from "@/components/shared/theme-provider";
 import TopBar from "@/components/shared/top-bar";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 export const metadata: Metadata = {
   title: "GDOP UI",
@@ -23,10 +23,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           <SidebarProvider>
             <AppSidebar />
-            <main className="bg-card my-2 mr-2 w-full rounded-lg px-5 py-2">
+            <SidebarInset className="px-5 py-2 shadow-none!">
               <TopBar />
               {children}
-            </main>
+            </SidebarInset>
           </SidebarProvider>
         </ThemeProvider>
       </body>
