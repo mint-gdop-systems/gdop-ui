@@ -1,0 +1,27 @@
+name: Build Registry
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  tokens-and-registry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm run registry:build
+
+      - name: Registry output is up to date
+        run: git diff --exit-code -- public/r
