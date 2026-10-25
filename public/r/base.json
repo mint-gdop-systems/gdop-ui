@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "base",
+  "title": "GDOP base design system",
+  "description": "All GDOP colors and design tokens (scales, semantic, status tones, radius, elevation) with Tailwind v4 theme wiring.",
+  "files": [
+    {
+      "path": "src/registry/style/base.css",
+      "content": "/* ============================================================================\n * GDOP base tokens — The source of truth for every color and design token.\n *\n *   • The docs Colors page parses this file and renders it (app/foundations/colors).\n *   • The shadcn registry item \"base\" ships this file as-is (registry.json → public/r/base.json).\n *   • The @theme block at the bottom is GENERATED from the declarations below\n *     (`npm run tokens:sync`). Edit tokens here; never edit the generated block.\n *\n * Authoring rules (the parser relies on them):\n *   1. Declarations live in `:root { }` (light) and `.dark { }` (overrides only).\n *   2. A comment line of the form  @group <kind> <id>: <description>  starts a group\n *      (see the groups below for examples).\n *      kinds: scale | semantic | tone | other.  scale/tone ids must match the token names:\n *      --<id>-<step> for scales, --tone-<id>-<role> for tones.\n *   3. One declaration per line. A short trailing comment becomes the token's description.\n *   4. Components use semantic + tone tokens. Scales are primitives.\n *\n * Install target: ~/app/base.css, then `@import \"./base.css\";` after `@import \"tailwindcss\";`.\n * ========================================================================== */\n\n@custom-variant dark (&:is(.dark *));\n\n:root {\n  /* @group scale brand: Logo blue. #00549b is brand-700 (7.66:1 on white). */\n  --brand-50: #f2f7fe;\n  --brand-100: #e1eeff;\n  --brand-200: #c2deff;\n  --brand-300: #95c5fd;\n  --brand-400: #6da5e5;\n  --brand-500: #3e80c7;\n  --brand-600: #2265a9;\n  --brand-700: #00549b; /* logo blue */\n  --brand-800: #043d72;\n  --brand-900: #012a52;\n  --brand-950: #001936;\n}\n",
+      "type": "registry:base",
+      "target": "~/app/base.css"
+    }
+  ],
+  "docs": "Add `@import \"./base.css\";` after `@import \"tailwindcss\";` in your globals.css, and remove the default shadcn color variables it replaces. Using a src/ directory? Move the file to src/app/base.css.",
+  "type": "registry:base"
+}

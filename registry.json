@@ -1,0 +1,6 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "GDOP",
+  "homepage": "https://www.gdop.gov.et",
+  "include": ["src/registry/style/registry.json"]
+}
