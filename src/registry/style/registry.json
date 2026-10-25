@@ -10,7 +10,7 @@
         {
           "path": "base.css",
           "type": "registry:base",
-          "target": "~src/app/globals.css"
+          "target": "~/src/app/globals.css"
         }
       ]
     }

@@ -11,7 +11,7 @@
         {
           "path": "src/registry/style/base.css",
           "type": "registry:base",
-          "target": "~src/app/globals.css"
+          "target": "~/src/app/globals.css"
         }
       ],
       "type": "registry:base"
